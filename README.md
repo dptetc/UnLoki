@@ -53,4 +53,5 @@ Licensed under the [Apache License, Version 2.0](https://www.apache.org/licenses
 ## List of used information sources
 1. http://java-performance.info/updating-final-and-static-final-fields/
 2. https://www.niceideas.ch/roller2/badtrash/entry/java_create_enum_instances_dynamically
-3. http://java-performance.info/updating-final-and-static-final-fields/
+3. https://blog.gotofinal.com/java/diorite/breakingjava/2017/06/24/dynamic-enum.html
+4. https://blog.gotofinal.com/java/breakingjava/2017/11/08/reflections-in-java-9.html

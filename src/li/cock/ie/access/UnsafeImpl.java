@@ -151,7 +151,7 @@ public class UnsafeImpl implements IAccess {
         Object base = getFieldBase(target, obj, isStatic);
         long offset = getFieldOffset(target, isStatic);
 
-        if(!base.getClass().getName().equals("<unknown>"))
+        if(base == null || !base.getClass().getName().equals("<unknown>"))
             return _reflect.exec(_putObject, _unsafe, base, offset, value);
         else return false;
     }

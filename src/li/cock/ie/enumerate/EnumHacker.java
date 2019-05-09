@@ -96,6 +96,8 @@ public class EnumHacker {
     }
 
     public boolean setOrdinal(Enum<? extends Enum<?>> enumObj, int x) {
+        if(enumObj == null) return false;
+
         if(_lazy) {
             _bypass.replaceMethod();
             this._ordinal = _bypass.getField(Enum.class, "ordinal");

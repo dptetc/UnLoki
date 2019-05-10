@@ -38,6 +38,14 @@ public class DuckBypass {
         this(reflect, access, false);
     }
 
+    public DuckBypass(IAccess access, boolean debug) {
+        this(new DuckReflect(debug), access);
+    }
+
+    public DuckBypass(IAccess access) {
+        this(access, false);
+    }
+
     public DuckBypass(DuckReflect reflect, boolean replaceSetAccessible) {
         this(reflect, new MultiImpl(reflect), replaceSetAccessible);
     }

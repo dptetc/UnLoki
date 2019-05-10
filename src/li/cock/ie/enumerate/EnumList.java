@@ -106,17 +106,34 @@ public class EnumList<E extends Enum<E>> implements List<E> {
         return _values.toArray(a);
     }
 
+    public E newInstance(int ordinal, String name, Class<?> argTypes, Object... extraValues) {
+        return _hack.newInstance(_enumType, ordinal, name, argTypes, extraValues);
+    }
+
     public E newInstance(int ordinal, String name, Object... extraValues) {
         return _hack.newInstance(_enumType, ordinal, name, extraValues);
     }
 
-    public boolean add(String name, Object... extraValues) {
+    public E add(String name, Class<?> argTypes, Object... extraValues) {
         if(_lazyLevel > 1) pull();
 
-        boolean success = _values.add(newInstance(_values.size(), name, extraValues));
-        if(success & (_lazyLevel > 0)) push();
+        E newEnum = newInstance(_values.size(), name, argTypes, extraValues);
 
-        return success;
+        boolean success = _values.add(newEnum);
+        if(_lazyLevel > 0) push();
+
+        return newEnum;
+    }
+
+    public E add(String name, Object... extraValues) {
+        if(_lazyLevel > 1) pull();
+
+        E newEnum = newInstance(_values.size(), name, extraValues);
+
+        _values.add(newEnum);
+        if(_lazyLevel > 0) push();
+
+        return newEnum;
     }
 
     @Override
@@ -197,6 +214,15 @@ public class EnumList<E extends Enum<E>> implements List<E> {
         return _values.get(index);
     }
 
+    public E set(int index, String name, Class<?> argTypes, Object... extraValues) {
+        if(_lazyLevel > 1) pull();
+
+        E result = _values.set(index, newInstance(index, name, argTypes, extraValues));
+        if(_lazyLevel > 0) push();
+
+        return result;
+    }
+
     public E set(int index, String name, Object... extraValues) {
         if(_lazyLevel > 1) pull();
 
@@ -216,10 +242,26 @@ public class EnumList<E extends Enum<E>> implements List<E> {
         return result;
     }
 
-    public void add(int index, String name, Object... extraValues) {
+    public E add(int index, String name, Class<?> argTypes, Object... extraValues) {
         if(_lazyLevel > 1) pull();
-        _values.add(index, newInstance(index, name, extraValues));
+
+        E newEnum = newInstance(index, name, argTypes, extraValues);
+        _values.add(index, newEnum);
+
         if(_lazyLevel > 0) push();
+
+        return newEnum;
+    }
+
+    public E add(int index, String name, Object... extraValues) {
+        if(_lazyLevel > 1) pull();
+
+        E newEnum = newInstance(index, name, extraValues);
+        _values.add(index, newEnum);
+
+        if(_lazyLevel > 0) push();
+
+        return newEnum;
     }
 
     @Override

@@ -7,7 +7,7 @@ Swollen utility for effectively killing Java through reflections.
 3. Edit values;
 4. And so on.
 
-**Example:**
+**Example 1:**
 ```java
 EnumList editor = new EnumList(Drink.class);
 
@@ -41,8 +41,29 @@ enum Drink {
 }
 ```
 
+**Example 2:**
+```java
+DuckBypass magic = new DuckBypass(); // Yes, it works with OpenJDK 13
+
+magic.getValue(Enemy.class, "walrus"); // Crutch: You must turn to the field before working with it
+magic.setValue(Enemy.class, "walrus", false);
+
+Enemy.say(); // I Am the Egg Man
+```
+
+```java
+class Enemy {
+    public static final Boolean walrus = true;
+
+    public static void say() {
+        System.out.println(walrus ? "I Am the Walrus" : "I Am the Egg Man");
+    }
+}
+```
+
 ## What can't it do?
-Work with primitives.
+- Work with primitives.
+- ...and String?
 
 ## What versions of Java are supported?
 Java 6 and above (including Java 12).

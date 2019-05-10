@@ -106,7 +106,7 @@ public class EnumList<E extends Enum<E>> implements List<E> {
         return _values.toArray(a);
     }
 
-    public E newInstance(int ordinal, String name, Class<?> argTypes, Object... extraValues) {
+    public E newInstance(int ordinal, String name, Class<?>[] argTypes, Object... extraValues) {
         return _hack.newInstance(_enumType, ordinal, name, argTypes, extraValues);
     }
 
@@ -114,7 +114,7 @@ public class EnumList<E extends Enum<E>> implements List<E> {
         return _hack.newInstance(_enumType, ordinal, name, extraValues);
     }
 
-    public E add(String name, Class<?> argTypes, Object... extraValues) {
+    public E add(String name, Class<?>[] argTypes, Object... extraValues) {
         if(_lazyLevel > 1) pull();
 
         E newEnum = newInstance(_values.size(), name, argTypes, extraValues);
@@ -214,7 +214,7 @@ public class EnumList<E extends Enum<E>> implements List<E> {
         return _values.get(index);
     }
 
-    public E set(int index, String name, Class<?> argTypes, Object... extraValues) {
+    public E set(int index, String name, Class<?>[] argTypes, Object... extraValues) {
         if(_lazyLevel > 1) pull();
 
         E result = _values.set(index, newInstance(index, name, argTypes, extraValues));
@@ -242,7 +242,7 @@ public class EnumList<E extends Enum<E>> implements List<E> {
         return result;
     }
 
-    public E add(int index, String name, Class<?> argTypes, Object... extraValues) {
+    public E add(int index, String name, Class<?>[] argTypes, Object... extraValues) {
         if(_lazyLevel > 1) pull();
 
         E newEnum = newInstance(index, name, argTypes, extraValues);

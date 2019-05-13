@@ -62,8 +62,13 @@ class Enemy {
 ```
 
 ## What can't it do?
-- Work with primitives.
+- Work with primitives;
 - ...and String?
+
+## TODO
+- Complete rewriting;
+- More performance;
+- More lazy.
 
 ## What versions of Java are supported?
 Java 6 and above (including Java 12).
